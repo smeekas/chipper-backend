@@ -5,7 +5,7 @@ import fs from "fs";
 const app: express.Application = express();
 
 // Take a port 3000 for running server.
-const port: number = 9999;
+const port = process.env.PORT || 9999;
 // let fs = require("fs");
 app.use(cors());
 // Handling '/' Request
