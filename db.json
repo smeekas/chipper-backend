@@ -4,5 +4,11 @@
     "image": "https://firebasestorage.googleapis.com/v0/b/progessive-app.appspot.com/o/20230721-HammockDay_EN-IN2217412387_UHD.jpg?alt=media&token=1e71aa21-b5e1-41d4-bca0-f8d0aa418857",
     "location": "somewhere on earth",
     "title": "Earth"
+  },
+  {
+    "id": "2023-09-11T08:20:03.900Z",
+    "title": "mr.",
+    "location": "rengoku 3",
+    "image": "http://127.0.0.1:9999/static/image_1694420403929.png"
   }
 ]
