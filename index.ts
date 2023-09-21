@@ -38,11 +38,13 @@ app.post("/", imageUpload.single("image"), (_req, _res) => {
   const jsonData = readData("./db.json");
   jsonData.push(postData);
   writeData("./db.json", jsonData);
-  webpush.setVapidDetails(
-    "mailto:hello@abc.com",
-    "BFfDbXYABqkgeRUfkE5BrS484nEU9ZQ00MGYUk3ceVOtCdvIDU1E63lNJ3d8uraB4cbJQTZc3S7OxV0b78492qw",
-    "p_tXIna1_E_KFSPXW4WvFyL237Yo1M6KfMWIC-dSieg"
-  );
+  if (process.env.pub && process.env.pri) {
+    webpush.setVapidDetails(
+      "mailto:hello@abc.com",
+      process.env.pub,
+      process.env.pri
+    );
+  }
   const subscriptions: SubType = readData("./sub.json");
   subscriptions.forEach((data, index) => {
     console.log(data, "it-", index);

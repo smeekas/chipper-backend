@@ -8,6 +8,9 @@
     "start": "tsc && node ./build/index.js",
     "web-push": "web-push"
   },
+  "engines": {
+    "node": ">=16 <18"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
