@@ -32,7 +32,7 @@ app.post("/", imageUpload.single("image"), (_req, _res) => {
     id: _req.body.id,
     title: _req.body.title,
     location: _req.body.location,
-    image: `http://127.0.0.1:9999/static/${_req.file?.filename}`
+    image: `https://backend-l0yc.onrender.com/static/${_req.file?.filename}`,
   };
   // return;
   const jsonData = readData("./db.json");
