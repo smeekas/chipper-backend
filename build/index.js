@@ -34,13 +34,15 @@ app.post("/", fileHandling_1.imageUpload.single("image"), (_req, _res) => {
         id: _req.body.id,
         title: _req.body.title,
         location: _req.body.location,
-        image: `http://127.0.0.1:9999/static/${(_a = _req.file) === null || _a === void 0 ? void 0 : _a.filename}`
+        image: `http://127.0.0.1:9999/static/${(_a = _req.file) === null || _a === void 0 ? void 0 : _a.filename}`,
     };
     // return;
     const jsonData = (0, utils_1.readData)("./db.json");
     jsonData.push(postData);
     (0, utils_1.writeData)("./db.json", jsonData);
-    web_push_1.default.setVapidDetails("mailto:hello@abc.com", "BFfDbXYABqkgeRUfkE5BrS484nEU9ZQ00MGYUk3ceVOtCdvIDU1E63lNJ3d8uraB4cbJQTZc3S7OxV0b78492qw", "p_tXIna1_E_KFSPXW4WvFyL237Yo1M6KfMWIC-dSieg");
+    if (process.env.pub && process.env.pri) {
+        web_push_1.default.setVapidDetails("mailto:hello@abc.com", process.env.pub, process.env.pri);
+    }
     const subscriptions = (0, utils_1.readData)("./sub.json");
     subscriptions.forEach((data, index) => {
         console.log(data, "it-", index);
