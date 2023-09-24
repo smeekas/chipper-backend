@@ -24,3 +24,20 @@ export function getBase64(file: File) {
     console.log("Error: ", error);
   };
 }
+// export function MulterToBlob(file: Express.Multer.File) {
+//   const formData = new FormData();
+//   const buff = Buffer.from(file.buffer);
+//   formData.append("file", buff, {
+//     filename: file.originalname,
+//     contentType: file.mimetype,
+//   });
+
+//   return this.httpService
+//     .post("http://test_server/file", formData, {
+//       headers: {
+//         ...formData.getHeaders(),
+//         "Content-Length": `${formData.getLengthSync()}`,
+//       },
+//     })
+//     .pipe(map((response) => response.data));
+// }

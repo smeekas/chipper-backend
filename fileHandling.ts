@@ -12,7 +12,7 @@ const imageStorage = multer.diskStorage({
 });
 
 export const imageUpload = multer({
-  storage: imageStorage,
+  storage: multer.memoryStorage(),
   limits: {
     fileSize: 1000000, // 1000000 Bytes = 1 MB
   },
