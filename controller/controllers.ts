@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { SubType } from "../types";
 import webpush from "web-push";
-
+import http from "http";
 import { readData, writeData } from "../utils";
 import { uploadDirect } from "@uploadcare/upload-client";
 export const getAll: RequestHandler = (req, res, next) => {
@@ -15,18 +15,24 @@ export const subscribe: RequestHandler = (req, res) => {
   res.json({ status: true });
 };
 export const postPost: RequestHandler = async (_req, _res) => {
+  console.log(_req.body);
+  console.log(_req.files);
+  console.log(_req.file?.path);
+  console.log(!_req.file);
   try {
-    if (!_req.file)
+    if (!_req.file) {
       return _res.status(400).json({ message: "Something went wrong" });
-    const result = await uploadDirect(_req.file.buffer as Buffer, {
-      publicKey: "211624b78165a04bde0c",
-      store: "auto",
-    });
+    }
+    // const result = await uploadDirect(convertMulterFileToFile(_req.file), {
+    //   publicKey: "211624b78165a04bde0c",
+    //   store: "auto",
+    //   // contentType: "image/jpg",
+    // });
     const postData = {
       id: _req.body.id,
       title: _req.body.title,
       location: _req.body.location,
-      image: `https://ucarecdn.com/${result.uuid}`,
+      image: `https://backend-l0yc.onrender.com/static/${_req.file?.filename}`,
     };
     const jsonData = readData("./db.json");
     jsonData.push(postData);
@@ -61,6 +67,7 @@ export const postPost: RequestHandler = async (_req, _res) => {
     //   });
     _res.status(201).json({ id: _req.body.id });
   } catch (err) {
+    console.log(err);
     _res.status(400).json({ message: "something went wrong" });
   }
 };
