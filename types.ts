@@ -8,3 +8,10 @@ export type PostType = {
 };
 
 export type SubType = PostType[];
+
+export type PostData = {
+  id: string;
+  image: string;
+  location: string;
+  title: string;
+};

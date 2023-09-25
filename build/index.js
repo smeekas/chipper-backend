@@ -21,6 +21,7 @@ app.use("/static", express_1.default.static("images"));
 app.post("/", fileHandling_1.imageUpload.single("image"), controllers_1.postPost);
 app.post("/sub", controllers_1.subscribe);
 app.get("/post/:id", controllers_1.singlePost);
+app.delete("/post/:id", deletepost);
 // Server setup
 app.listen(port, () => {
     console.log(`TypeScript with Express

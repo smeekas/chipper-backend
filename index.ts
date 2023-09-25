@@ -5,6 +5,7 @@ const path = require("path");
 import bodyParser from "body-parser";
 import { imageUpload } from "./fileHandling";
 import {
+  deletepost,
   getAll,
   postPost,
   singlePost,
@@ -24,6 +25,7 @@ app.use("/static", express.static("images"));
 app.post("/", imageUpload.single("image"), postPost);
 app.post("/sub", subscribe);
 app.get("/post/:id", singlePost);
+app.delete("/post/:id", deletepost);
 // Server setup
 app.listen(port, () => {
   console.log(`TypeScript with Express

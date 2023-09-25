@@ -1,10 +1,12 @@
 import { RequestHandler } from "express";
-import { SubType } from "../types";
+import { PostData, SubType } from "../types";
 import webpush from "web-push";
 import http from "http";
 import { readData, writeData } from "../utils";
 import { uploadDirect } from "@uploadcare/upload-client";
 import { json } from "body-parser";
+import { unlink } from "fs";
+import path from "path";
 export const getAll: RequestHandler = (req, res, next) => {
   res.send(readData("./db.json"));
 };
@@ -24,6 +26,29 @@ export const singlePost: RequestHandler = (req, res) => {
     return res.json(post);
   } else {
     return res.status(400).json({ message: "something went wrong" });
+  }
+};
+export const deletepost: RequestHandler = (req, res) => {
+  const jsonData: PostData[] = readData("./db.json");
+  const post = jsonData.filter(
+    (post: { id: any }) => post.id !== req.params.id
+  );
+  const removedpost = jsonData.find(
+    (post: { id: any }) => post.id === req.params.id
+  );
+  if (removedpost) {
+    const imageName = removedpost.image.split("/").at(-1);
+    if (imageName) {
+      console.log(imageName, path.join(__dirname, "images", imageName));
+      unlink(path.join(__dirname, "..", "images", imageName), (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).json({ message: "somrthing went wrong" });
+        }
+        writeData("./db.json", post);
+        return res.status(200).json({ message: "deleted" });
+      });
+    }
   }
 };
 export const postPost: RequestHandler = async (_req, _res) => {
