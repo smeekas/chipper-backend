@@ -43,7 +43,9 @@ export const deletepost: RequestHandler = (req, res) => {
       unlink(path.join(__dirname, "..", "images", imageName), (err) => {
         if (err) {
           console.log(err);
-          return res.status(400).json({ message: "somrthing went wrong" });
+          return res
+            .status(400)
+            .json({ message: "somrthing went wrong", err: err });
         }
         writeData("./db.json", post);
         return res.status(200).json({ message: "deleted" });
