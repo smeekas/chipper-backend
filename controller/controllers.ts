@@ -5,7 +5,7 @@ import http from "http";
 import { readData, writeData } from "../utils";
 import { uploadDirect } from "@uploadcare/upload-client";
 import { json } from "body-parser";
-import { unlink } from "fs";
+import { readdir, unlink } from "fs";
 import path from "path";
 export const getAll: RequestHandler = (req, res, next) => {
   res.send(readData("./db.json"));
@@ -36,12 +36,17 @@ export const deletepost: RequestHandler = (req, res) => {
   const removedpost = jsonData.find(
     (post: { id: any }) => post.id === req.params.id
   );
+  readdir(path.join(__dirname), (err, files) => {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  });
   if (removedpost) {
     const imageName = removedpost.image.split("/").at(-1);
     if (imageName) {
       // console.log(imageName, path.join(__dirname, "images", imageName));
-      console.log(path.join( "images", imageName))
-      unlink(path.join( "images", imageName), (err) => {
+      console.log(path.join("images", imageName));
+      unlink(path.join("images", imageName), (err) => {
         if (err) {
           console.log(err);
           return res
