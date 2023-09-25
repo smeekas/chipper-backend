@@ -40,7 +40,8 @@ export const deletepost: RequestHandler = (req, res) => {
     const imageName = removedpost.image.split("/").at(-1);
     if (imageName) {
       // console.log(imageName, path.join(__dirname, "images", imageName));
-      unlink(path.join("..", "images", imageName), (err) => {
+      console.log(path.join( "images", imageName))
+      unlink(path.join( "images", imageName), (err) => {
         if (err) {
           console.log(err);
           return res
