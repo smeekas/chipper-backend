@@ -17,7 +17,7 @@ export const imageUpload = multer({
     fileSize: 1000000, // 1000000 Bytes = 1 MB
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg)$/)) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
       // upload only png and jpg format
       return cb(new Error("Please upload a Image"));
     }

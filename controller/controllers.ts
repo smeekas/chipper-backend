@@ -13,6 +13,7 @@ export const getAll: RequestHandler = (req, res, next) => {
 
 export const subscribe: RequestHandler = (req, res) => {
   const jsonData: SubType = readData("./sub.json");
+  console.log("SUBSCRIBE====================>", req.body);
   jsonData.push(req.body);
   writeData("./sub.json", jsonData);
   res.json({ status: true });
@@ -82,34 +83,44 @@ export const postPost: RequestHandler = async (_req, _res) => {
     const jsonData = readData("./db.json");
     jsonData.push(postData);
     writeData("./db.json", jsonData);
-    if (process.env.pub && process.env.pri) {
-      webpush.setVapidDetails(
-        "mailto:hello@abc.com",
-        process.env.pub,
-        process.env.pri
-      );
-    }
-    //   const subscriptions: SubType = readData("./sub.json");
-    //   subscriptions.forEach((data, index) => {
-    //     const pushConfig = {
-    //       endpoint: data.endpoint,
-    //       keys: {
-    //         auth: data.keys.auth,
-    //         p256dh: data.keys.p256dh,
-    //       },
-    //     };
-    //     webpush
-    //       .sendNotification(
-    //         pushConfig,
-    //         JSON.stringify({
-    //           title: "new post",
-    //           content: "new post added you fool!",
-    //         })
-    //       )
-    //       .catch((err) => {
-    //         console.log(err, "error in notification");
-    //       });
-    //   });
+    webpush.setVapidDetails(
+      "mailto:smeet.k@simformsolutions.com",
+      "BJ8LOvp17TjuhoQzT1HdfSNv5dhRSU81hGGckiHgJFuxttYbceNHLDqYT1gwjPLfRxm23b3zrUPP-RWt54x91Tw",
+      "JKMU1vNBGGUSaiCvlStrHjbtjx-9VSW5caibqwNRQL4"
+    );
+
+    const subscriptions: SubType = readData("./sub.json");
+    subscriptions.forEach((data, index) => {
+      if (data) {
+        console.log(data, "<--data");
+        const pushConfig = {
+          endpoint: data.endpoint,
+          keys: {
+            auth: data.keys.auth,
+            p256dh: data.keys.p256dh,
+          },
+        };
+        console.log(
+          JSON.stringify({
+            title: "new post",
+            content: "new post added you fool!",
+            postData: postData,
+          })
+        );
+        webpush
+          .sendNotification(
+            pushConfig,
+            JSON.stringify({
+              title: "new post",
+              content: "new post added you fool!",
+              postData: postData,
+            })
+          )
+          .catch((err) => {
+            console.log(err, "error in notification");
+          });
+      }
+    });
     _res.status(201).json({ id: _req.body.id });
   } catch (err) {
     console.log(err);

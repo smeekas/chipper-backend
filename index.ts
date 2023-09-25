@@ -16,7 +16,7 @@ const app: express.Application = express();
 
 const port = process.env.PORT || 9999;
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
 app.get("/", getAll);
 app.use("/static", express.static("images"));
 // app.use(bodyParser.json());

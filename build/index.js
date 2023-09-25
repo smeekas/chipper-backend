@@ -12,7 +12,7 @@ const controllers_1 = require("./controller/controllers");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 9999;
 app.use((0, cors_1.default)());
-// app.use(express.json());
+app.use(express_1.default.json());
 app.get("/", controllers_1.getAll);
 app.use("/static", express_1.default.static("images"));
 // app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.use("/static", express_1.default.static("images"));
 app.post("/", fileHandling_1.imageUpload.single("image"), controllers_1.postPost);
 app.post("/sub", controllers_1.subscribe);
 app.get("/post/:id", controllers_1.singlePost);
-app.delete("/post/:id", deletepost);
+app.delete("/post/:id", controllers_1.deletepost);
 // Server setup
 app.listen(port, () => {
     console.log(`TypeScript with Express
