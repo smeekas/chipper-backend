@@ -4,6 +4,7 @@ import webpush from "web-push";
 import http from "http";
 import { readData, writeData } from "../utils";
 import { uploadDirect } from "@uploadcare/upload-client";
+import { json } from "body-parser";
 export const getAll: RequestHandler = (req, res, next) => {
   res.send(readData("./db.json"));
 };
@@ -13,6 +14,17 @@ export const subscribe: RequestHandler = (req, res) => {
   jsonData.push(req.body);
   writeData("./sub.json", jsonData);
   res.json({ status: true });
+};
+
+export const singlePost: RequestHandler = (req, res) => {
+  const jsonData = readData("./db.json");
+
+  const post = jsonData.find((post: { id: any }) => post.id === req.params.id);
+  if (post) {
+    return res.json(post);
+  } else {
+    return res.status(400).json({ message: "something went wrong" });
+  }
 };
 export const postPost: RequestHandler = async (_req, _res) => {
   console.log(_req.body);

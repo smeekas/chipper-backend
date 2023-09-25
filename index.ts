@@ -4,7 +4,12 @@ const path = require("path");
 
 import bodyParser from "body-parser";
 import { imageUpload } from "./fileHandling";
-import { getAll, postPost, subscribe } from "./controller/controllers";
+import {
+  getAll,
+  postPost,
+  singlePost,
+  subscribe,
+} from "./controller/controllers";
 // Initialize the express engine
 const app: express.Application = express();
 
@@ -14,15 +19,17 @@ app.use(cors());
 app.get("/", getAll);
 app.use("/static", express.static("images"));
 // app.use(bodyParser.json());
-// 
+//
 // app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/", imageUpload.single("image"),postPost);
+app.post("/", imageUpload.single("image"), postPost);
 app.post("/sub", subscribe);
+app.get("/post/:id", singlePost);
 // Server setup
 app.listen(port, () => {
   console.log(`TypeScript with Express
          http://localhost:${port}/`);
 });
+
 // Public Key:
 // BFfDbXYABqkgeRUfkE5BrS484nEU9ZQ00MGYUk3ceVOtCdvIDU1E63lNJ3d8uraB4cbJQTZc3S7OxV0b78492qw
 

@@ -16,10 +16,11 @@ app.use((0, cors_1.default)());
 app.get("/", controllers_1.getAll);
 app.use("/static", express_1.default.static("images"));
 // app.use(bodyParser.json());
-// 
+//
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/", fileHandling_1.imageUpload.single("image"), controllers_1.postPost);
 app.post("/sub", controllers_1.subscribe);
+app.get("/post/:id", controllers_1.singlePost);
 // Server setup
 app.listen(port, () => {
     console.log(`TypeScript with Express
