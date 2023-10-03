@@ -84,7 +84,7 @@ export const postPost: RequestHandler = async (_req, _res) => {
         .status(201)
         .json({ id: _req.body.id, message: "not able to send notification" });
     }
-    console.log(process.env);
+    console.log(process.env.pub, process.env.pri);
     webpush.setVapidDetails(
       "mailto:smeet.k@simformsolutions.com",
       process.env.pub,
