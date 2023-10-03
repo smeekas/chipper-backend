@@ -69,11 +69,7 @@ export const postPost: RequestHandler = async (_req, _res) => {
     if (!_req.file) {
       return _res.status(400).json({ message: "Something went wrong" });
     }
-    // const result = await uploadDirect(convertMulterFileToFile(_req.file), {
-    //   publicKey: "211624b78165a04bde0c",
-    //   store: "auto",
-    //   // contentType: "image/jpg",
-    // });
+
     const postData = {
       id: _req.body.id,
       title: _req.body.title,
@@ -83,10 +79,15 @@ export const postPost: RequestHandler = async (_req, _res) => {
     const jsonData = readData("./db.json");
     jsonData.push(postData);
     writeData("./db.json", jsonData);
+    if (!process.env.pub || !process.env.pri) {
+      return _res
+        .status(201)
+        .json({ id: _req.body.id, message: "not able to send notification" });
+    }
     webpush.setVapidDetails(
       "mailto:smeet.k@simformsolutions.com",
-      "BJ8LOvp17TjuhoQzT1HdfSNv5dhRSU81hGGckiHgJFuxttYbceNHLDqYT1gwjPLfRxm23b3zrUPP-RWt54x91Tw",
-      "JKMU1vNBGGUSaiCvlStrHjbtjx-9VSW5caibqwNRQL4"
+      process.env.pub,
+      process.env.pri
     );
 
     const subscriptions: SubType = readData("./sub.json");

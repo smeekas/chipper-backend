@@ -7,6 +7,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path = require("path");
 const fileHandling_1 = require("./fileHandling");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+console.log(process.env.pub);
 const controllers_1 = require("./controller/controllers");
 // Initialize the express engine
 const app = (0, express_1.default)();
