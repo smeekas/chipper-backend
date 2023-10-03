@@ -74,7 +74,7 @@ export const postPost: RequestHandler = async (_req, _res) => {
       id: _req.body.id,
       title: _req.body.title,
       location: _req.body.location,
-      image: `https://backend-l0yc.onrender.com/static/${_req.file?.filename}`,
+      image: `https://chipper-backend.onrender.com/static/${_req.file?.filename}`,
     };
     const jsonData = readData("./db.json");
     jsonData.push(postData);
