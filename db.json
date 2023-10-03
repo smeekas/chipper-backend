@@ -1,14 +1,1 @@
-[
-  {
-    "id": "1",
-    "image": "https://firebasestorage.googleapis.com/v0/b/progessive-app.appspot.com/o/20230721-HammockDay_EN-IN2217412387_UHD.jpg?alt=media&token=1e71aa21-b5e1-41d4-bca0-f8d0aa418857",
-    "location": "somewhere on earth",
-    "title": "Earth"
-  },
-  {
-    "id": "2023-09-11T08:20:03.900Z",
-    "title": "norway",
-    "location": "northen lights",
-    "image": "https://ucarecdn.com/ed95b493-63ef-4f62-a6d3-8213c1af380c/2021427132143auroraborealisTyumenRegionRussia.jpg"
-  }
-]
+[{"id":"1","image":"https://firebasestorage.googleapis.com/v0/b/progessive-app.appspot.com/o/20230721-HammockDay_EN-IN2217412387_UHD.jpg?alt=media&token=1e71aa21-b5e1-41d4-bca0-f8d0aa418857","location":"somewhere on earth","title":"Earth"},{"id":"2023-09-11T08:20:03.900Z","title":"norway","location":"northen lights","image":"https://ucarecdn.com/ed95b493-63ef-4f62-a6d3-8213c1af380c/2021427132143auroraborealisTyumenRegionRussia.jpg"}]

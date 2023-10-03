@@ -9,7 +9,6 @@ const path = require("path");
 const fileHandling_1 = require("./fileHandling");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-console.log(process.env.pub);
 const controllers_1 = require("./controller/controllers");
 // Initialize the express engine
 const app = (0, express_1.default)();
@@ -18,9 +17,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get("/", controllers_1.getAll);
 app.use("/static", express_1.default.static("images"));
-// app.use(bodyParser.json());
 //
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/", fileHandling_1.imageUpload.single("image"), controllers_1.postPost);
 app.post("/sub", controllers_1.subscribe);
 app.get("/post/:id", controllers_1.singlePost);
@@ -30,7 +27,3 @@ app.listen(port, () => {
     console.log(`TypeScript with Express
          http://localhost:${port}/`);
 });
-// Public Key:
-// BFfDbXYABqkgeRUfkE5BrS484nEU9ZQ00MGYUk3ceVOtCdvIDU1E63lNJ3d8uraB4cbJQTZc3S7OxV0b78492qw
-// Private Key:
-// p_tXIna1_E_KFSPXW4WvFyL237Yo1M6KfMWIC-dSieg
